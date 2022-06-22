@@ -1,3 +1,7 @@
+import 'dart:ffi';
+import 'dart:io';
+
+import 'package:clash_ap/dataStruct/stateOfPlayer.dart';
 import 'package:clash_ap/screens/asking_tag.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +12,15 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   void showData(val) {
-    print(val);
+    getData();
+  }
+
+  void getData() async {
+    try {
+      await StateOfPlayer().setStateOfPlayer();
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
