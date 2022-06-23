@@ -8,6 +8,7 @@ const myClashAPIURL = 'https://testhoo.000webhostapp.com/?userid=%23CLG8JL0Q9';
 
 class StateOfPlayer {
   List<EpicCard> cards = [];
+  num totalCardNeeded = 0;
 
   //3. Create the Asynchronous method getCoinData() that returns a Future (the price data).
   Future fetchStateOfPlayer() async {
@@ -72,9 +73,17 @@ class StateOfPlayer {
     });
   }
 
-  Future<String> setStateOfPlayer() async {
+  Future<num> get setStateOfPlayer async {
+    print('coucou');
     sortingCards(await fetchStateOfPlayer());
-    print(cards[1].nextLevel);
-    return 'yo';
+    cards.forEach((el) {
+      totalCardNeeded += el.maxLevel;
+    });
+    print(totalCardNeeded);
+    return totalCardNeeded;
+  }
+
+  num get playerTotalCardNeeded {
+    return totalCardNeeded;
   }
 }
