@@ -4,16 +4,18 @@ import 'package:clash_ap/dataStruct/Card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-const myClashAPIURL = 'https://testhoo.000webhostapp.com/?userid=%23CLG8JL0Q9';
+const myClashAPIURL = 'https://testhoo.000webhostapp.com';
 
 class StateOfPlayer {
   List<EpicCard> cards = [];
   num totalCardNeeded = 0;
 
   //3. Create the Asynchronous method getCoinData() that returns a Future (the price data).
-  Future fetchStateOfPlayer() async {
+  Future fetchStateOfPlayer(val) async {
     //4. Create a url combining the coinAPIURL with the currencies we're interested, BTC to USD.
-    String requestURL = '$myClashAPIURL';
+
+    String requestURL = '$myClashAPIURL/?userid=$val';
+    print(requestURL);
     //5. Make a GET request to the URL and wait for the response.
     http.Response response = await http.get(Uri.parse(requestURL));
 
@@ -73,9 +75,9 @@ class StateOfPlayer {
     });
   }
 
-  Future<num> get setStateOfPlayer async {
-    print('coucou');
-    sortingCards(await fetchStateOfPlayer());
+  //i want to implemente constructor her but do  error ;-; so i call it set
+  Future<num> setStateOfPlayer(val) async {
+    sortingCards(await fetchStateOfPlayer(val));
     cards.forEach((el) {
       totalCardNeeded += el.maxLevel;
     });

@@ -20,14 +20,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String totalNeededCards = 'awaiting for data';
 
-  //i using a fake function whit val in cose i don't undersdant why didn't whytout
+  //i use this like a gateway
   void showData(val) {
-    getData();
+    getData(val);
   }
 
-  void getData() async {
+  void getData(val) async {
     try {
-      num tmpValue = await StateOfPlayer().setStateOfPlayer;
+      num tmpValue = await StateOfPlayer().setStateOfPlayer(val);
       setState(() {
         totalNeededCards = tmpValue.toString();
       });
